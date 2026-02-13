@@ -1,0 +1,161 @@
+r <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine's Day, Adedasola ❤️</title>
+    <meta name="description" content="A romantic Valentine's Day tribute with 3D animations and heartfelt messages">
+    <meta name="keywords" content="Valentine's Day, love, romance, 3D heart, animated website">
+    <meta property="og:title" content="Happy Valentine's Day, Adedasola ❤️">
+    <meta property="og:description" content="A romantic Valentine's Day tribute with 3D animations and heartfelt messages">
+    <meta property="og:image" content="images/valentine-preview.jpg">
+    <meta property="og:type" content="website">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Cursor Glow Effect -->
+    <div id="cursor-glow"></div>
+    
+    <!-- Background Floating Hearts -->
+    <div id="floating-hearts"></div>
+
+    <!-- Letter Overlay -->
+    <div id="letter-overlay" class="letter-overlay">
+        <div class="envelope">
+            <div class="envelope-back"></div>
+            <div class="envelope-front">
+                <div class="envelope-flap"></div>
+            </div>
+            <div class="letter">
+                <div class="letter-content">
+                    <h3>My Dearest Love,</h3>
+                    <p>There's something special I want to share with you...</p>
+                    <div class="heart-icon">💌</div>
+                    <p class="click-hint">Click to open</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <main id="main-content" style="display: none;">
+        <!-- Hero Section -->
+        <section id="hero" class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">Happy Valentine's Day, Adedasola ❤️</h1>
+                <p class="hero-subtitle">You are my today and all of my tomorrows.</p>
+                <button class="cta-button" id="open-heart-btn">
+                    <span>Open My Heart</span>
+                    <i class="fas fa-heart"></i>
+                </button>
+            </div>
+            
+            <!-- 3D Heart Container -->
+            <div id="threejs-container"></div>
+            
+            <!-- Scroll Indicator -->
+            <div class="scroll-indicator">
+                <span>Scroll Down</span>
+                <div class="scroll-arrow"></div>
+            </div>
+        </section>
+
+        <!-- Love Message Section -->
+        <section id="love-message" class="love-message">
+            <div class="container">
+                <div class="message-card">
+                    <h2>My Dearest Adedasola,</h2>
+                    <p class="love-note">
+                        From the moment you walked into my life, everything changed. You are the missing piece I didn't know I was looking for.
+                    </p>
+                    <p class="love-note">
+                        Your smile brightens my darkest days, and your love gives me strength I never knew I had.
+                    </p>
+                    <p class="love-note">
+                        I promise to love you, cherish you, and stand by your side through all of life's adventures.
+                    </p>
+                    <div class="signature">
+                        <p>Forever Yours,</p>
+                        <p class="signature-name">Adedolapo</p>
+                    </div>
+                </div>
+                
+                <!-- Music Toggle -->
+                <!-- Removed duplicate music toggle to avoid ID conflict -->
+            </div>
+        </section>
+
+        <!-- Memory Section -->
+        <section id="memories" class="memories">
+            <div class="container">
+                <h2 class="section-title">Our Beautiful Memories</h2>
+                <div class="photo-grid" id="photo-grid">
+                    <!-- Photos will be loaded via JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Call to Action -->
+        <section class="final-cta">
+            <div class="container">
+                <h2 id="iloveyou-text">I Love You, Adedasola ❤️</h2>
+                <div id="final-hearts"></div>
+                <button class="replay-btn" id="replay-btn">Replay Our Story</button>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; 2026 • Created with Love</p>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox-modal" class="lightbox">
+        <span class="close-btn" id="lightbox-close">&times;</span>
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="Memory">
+            <video id="lightbox-video" controls style="display: none;"></video>
+            <div class="lightbox-caption" id="lightbox-caption"></div>
+        </div>
+    </div>
+
+    <!-- Audio Player -->
+    <audio id="bg-music" autoplay loop>
+        <source src="https://assets.mixkit.co/music/preview/mixkit-beautiful-dream-493.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div class="music-controls">
+        <button id="music-toggle" class="music-btn" aria-label="Toggle Music">
+            <i class="fas fa-music"></i>
+        </button>
+    </div>
+
+    <!-- Scripts -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+    <script type="module" src="script.js"></script>
+</body>
+</html>
