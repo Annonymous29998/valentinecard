@@ -710,12 +710,13 @@ main {
 
 .close-btn {
     position: absolute;
-    top: -50px;
-    right: 0;
+    top: 30px;
+    right: 30px;
     color: white;
     font-size: 3rem;
     cursor: pointer;
     transition: transform 0.3s ease;
+    z-index: 10002;
 }
 
 .close-btn:hover {

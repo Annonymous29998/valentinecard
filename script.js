@@ -8,9 +8,30 @@ let windowHalfX = window.innerWidth / 2;
 let windowHalfY = window.innerHeight / 2;
 let isAnimating = false;
 let musicPlaying = false;
+let currentMemoryIndex = 0;
+
+// Memories Data
+const memories = [
+    // Images
+    { type: 'image', src: 'images/image1.png', alt: 'Our Memory 1', caption: 'Beautiful Moment 1' },
+    { type: 'image', src: 'images/image2.png', alt: 'Our Memory 2', caption: 'Beautiful Moment 2' },
+    { type: 'image', src: 'images/image3.png', alt: 'Our Memory 3', caption: 'Beautiful Moment 3' },
+    { type: 'image', src: 'images/imsge4.png', alt: 'Our Memory 4', caption: 'Beautiful Moment 4' },
+    { type: 'image', src: 'images/imsge5.png', alt: 'Our Memory 5', caption: 'Beautiful Moment 5' },
+    // Videos
+    { type: 'video', src: 'videos/video1.mp4', alt: 'Video Memory 1', caption: 'Special Video Moment 1' },
+    { type: 'video', src: 'videos/video2.mp4', alt: 'Video Memory 2', caption: 'Special Video Moment 2' },
+    { type: 'video', src: 'videos/video3.mp4', alt: 'Video Memory 3', caption: 'Special Video Moment 3' },
+    { type: 'video', src: 'videos/video4.mp4', alt: 'Video Memory 4', caption: 'Special Video Moment 4' },
+    { type: 'video', src: 'videos/video5.mp4', alt: 'Video Memory 5', caption: 'Special Video Moment 5' },
+    { type: 'video', src: 'videos/video6.mp4', alt: 'Video Memory 6', caption: 'Special Video Moment 6' },
+    { type: 'video', src: 'videos/video7.mp4', alt: 'Video Memory 7', caption: 'Special Video Moment 7' },
+    { type: 'video', src: 'videos/video8.mp4', alt: 'Video Memory 8', caption: 'Special Video Moment 8' },
+    { type: 'video', src: 'videos/video9.mp4', alt: 'Video Memory 9', caption: 'Special Video Moment 9' }
+];
 
 // DOM Elements
-let letterOverlay, mainContent, envelope, letter, openHeartBtn, musicToggle, backgroundMusic, messageText, iloveyouText, finalHearts, photoGrid, lightboxModal, lightboxImg, lightboxVideo, lightboxCaption, lightboxClose, cursorGlow, replayBtn;
+let letterOverlay, mainContent, envelope, letter, openHeartBtn, musicToggle, backgroundMusic, messageText, iloveyouText, finalHearts, photoGrid, lightboxModal, lightboxImg, lightboxVideo, lightboxCaption, lightboxClose, cursorGlow, replayBtn, lightboxPrev, lightboxNext;
 
 // Initialize application
 document.addEventListener('DOMContentLoaded', () => {
@@ -33,6 +54,8 @@ document.addEventListener('DOMContentLoaded', () => {
     lightboxClose = document.getElementById('lightbox-close');
     cursorGlow = document.getElementById('cursor-glow');
     replayBtn = document.getElementById('replay-btn');
+    lightboxPrev = document.getElementById('lightbox-prev');
+    lightboxNext = document.getElementById('lightbox-next');
 
     init();
     initFloatingHearts();
@@ -208,24 +231,6 @@ function initFloatingHearts() {
 
 // Initialize photo grid with sample photos and video
 function initPhotoGrid() {
-    const memories = [
-        // Images
-        { type: 'image', src: 'images/image1.png', alt: 'Our Memory 1', caption: 'Beautiful Moment 1' },
-        { type: 'image', src: 'images/image2.png', alt: 'Our Memory 2', caption: 'Beautiful Moment 2' },
-        { type: 'image', src: 'images/image3.png', alt: 'Our Memory 3', caption: 'Beautiful Moment 3' },
-        { type: 'image', src: 'images/imsge4.png', alt: 'Our Memory 4', caption: 'Beautiful Moment 4' },
-        { type: 'image', src: 'images/imsge5.png', alt: 'Our Memory 5', caption: 'Beautiful Moment 5' },
-        // Videos
-        { type: 'video', src: 'videos/video1.mp4', alt: 'Video Memory 1', caption: 'Special Video Moment 1' },
-        { type: 'video', src: 'videos/video2.mp4', alt: 'Video Memory 2', caption: 'Special Video Moment 2' },
-        { type: 'video', src: 'videos/video4.mp4', alt: 'Video Memory 4', caption: 'Special Video Moment 4' },
-        { type: 'video', src: 'videos/video5.mp4', alt: 'Video Memory 5', caption: 'Special Video Moment 5' },
-        { type: 'video', src: 'videos/video6.mp4', alt: 'Video Memory 6', caption: 'Special Video Moment 6' },
-        { type: 'video', src: 'videos/video7.mp4', alt: 'Video Memory 7', caption: 'Special Video Moment 7' },
-        { type: 'video', src: 'videos/video8.mp4', alt: 'Video Memory 8', caption: 'Special Video Moment 8' },
-        { type: 'video', src: 'videos/video9.mp4', alt: 'Video Memory 9', caption: 'Special Video Moment 9' }
-    ];
-    
     memories.forEach((memory, index) => {
         const card = document.createElement('div');
         card.className = 'photo-card';
@@ -261,15 +266,21 @@ function initPhotoGrid() {
             });
         }
         
-        card.addEventListener('click', () => openLightbox(memory));
+        card.addEventListener('click', () => openLightbox(index));
         photoGrid.appendChild(card);
     });
 }
 
 // Lightbox functionality
-function openLightbox(memory) {
-    lightboxCaption.textContent = memory.caption;
+function openLightbox(index) {
+    currentMemoryIndex = index;
+    updateLightboxContent();
     lightboxModal.classList.add('open');
+}
+
+function updateLightboxContent() {
+    const memory = memories[currentMemoryIndex];
+    lightboxCaption.textContent = memory.caption;
     
     if (memory.type === 'video') {
         lightboxImg.style.display = 'none';
@@ -289,6 +300,18 @@ function openLightbox(memory) {
             lightboxImg.style.opacity = '1';
         }, 100);
     }
+}
+
+function nextMemory(e) {
+    if (e) e.stopPropagation();
+    currentMemoryIndex = (currentMemoryIndex + 1) % memories.length;
+    updateLightboxContent();
+}
+
+function prevMemory(e) {
+    if (e) e.stopPropagation();
+    currentMemoryIndex = (currentMemoryIndex - 1 + memories.length) % memories.length;
+    updateLightboxContent();
 }
 
 function closeLightbox() {
@@ -362,10 +385,51 @@ function initEventListeners() {
         });
     }
 
+    // Lightbox navigation
+    if (lightboxPrev) {
+        lightboxPrev.addEventListener('click', prevMemory);
+    }
+    if (lightboxNext) {
+        lightboxNext.addEventListener('click', nextMemory);
+    }
+
+    // Mobile Swipe Navigation
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    lightboxModal.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    
+    lightboxModal.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, { passive: true });
+    
+    function handleSwipe() {
+        // Minimum swipe distance to trigger action
+        const threshold = 50;
+        const swipeDistance = touchEndX - touchStartX;
+        
+        if (Math.abs(swipeDistance) > threshold) {
+            if (swipeDistance < 0) {
+                // Swipe Left -> Next
+                nextMemory();
+            } else {
+                // Swipe Right -> Previous
+                prevMemory();
+            }
+        }
+    }
+
     // Keyboard navigation
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             closeLightbox();
+        } else if (e.key === 'ArrowLeft' && lightboxModal.classList.contains('open')) {
+            prevMemory();
+        } else if (e.key === 'ArrowRight' && lightboxModal.classList.contains('open')) {
+            nextMemory();
         }
     });
     

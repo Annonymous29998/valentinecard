@@ -1,4 +1,4 @@
-r <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -128,16 +128,18 @@ r <!DOCTYPE html>
     <!-- Lightbox Modal -->
     <div id="lightbox-modal" class="lightbox">
         <span class="close-btn" id="lightbox-close">&times;</span>
+        <button class="lightbox-nav prev-btn" id="lightbox-prev" aria-label="Previous image"><i class="fas fa-chevron-left"></i></button>
         <div class="lightbox-content">
             <img id="lightbox-img" src="" alt="Memory">
             <video id="lightbox-video" controls style="display: none;"></video>
             <div class="lightbox-caption" id="lightbox-caption"></div>
         </div>
+        <button class="lightbox-nav next-btn" id="lightbox-next" aria-label="Next image"><i class="fas fa-chevron-right"></i></button>
     </div>
 
     <!-- Audio Player -->
     <audio id="bg-music" autoplay loop>
-        <source src="https://assets.mixkit.co/music/preview/mixkit-beautiful-dream-493.mp3" type="audio/mp3">
+        <source src="music/Pentatonix_-_Valentine_CeeNaija.com_.mp3" type="audio/mp3">
         Your browser does not support the audio element.
     </audio>
 
